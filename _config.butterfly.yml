@@ -1,0 +1,202 @@
+# Butterfly Theme Configuration
+# Docs: https://butterfly.js.org/posts/butterfly-docs-en-theme-config/
+
+# ========== 导航菜单 ==========
+menu:
+  首页: / || fas fa-home
+  归档: /archives/ || fas fa-archive
+  标签: /tags/ || fas fa-tags
+  分类: /categories/ || fas fa-folder-open
+  关于: /about/ || fas fa-heart
+
+# ========== 代码高亮 ==========
+highlight_theme: mac # mac | mac light | default | ...
+highlight_copy: true
+highlight_lang: true
+highlight_shrink: false
+
+# ========== 社交链接 ==========
+social:
+  fab fa-github: https://github.com/ || Github
+
+# ========== 图片设置 ==========
+# 首页封面图（可以使用网络图片）
+default_cover:
+  - https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200
+  - https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200
+  - https://images.unsplash.com/photo-1655720828018-edd2daec9349?w=1200
+
+# 头像
+avatar:
+  img: https://api.dicebear.com/7.x/bottts/svg?seed=Saul
+  effect: false
+
+# ========== 首页设置 ==========
+# 首页大图
+index_img: https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1920
+
+# 文章页默认顶图
+default_top_img: https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1920
+
+# 首页 subtitle 打字效果
+subtitle:
+  enable: true
+  effect: true
+  loop: true
+  source: false
+  sub:
+    - "在 AI 时代锻造思想 ⚒️"
+    - "探索人工智能的无限可能 🤖"
+    - "Keep forging, keep learning 🔥"
+
+# ========== 文章设置 ==========
+post_meta:
+  page:
+    date_type: created
+    date_format: date
+    categories: true
+    tags: true
+    label: true
+  post:
+    date_type: both
+    date_format: date
+    categories: true
+    tags: true
+    label: true
+
+# 文章版权信息
+post_copyright:
+  enable: true
+  decode: false
+  author_href:
+  license: CC BY-NC-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+# 字数统计（需安装 hexo-wordcount）
+wordcount:
+  enable: false
+
+# 目录
+toc:
+  post: true
+  page: false
+  number: true
+  expand: false
+  style_simple: false
+
+# ========== 侧边栏 ==========
+aside:
+  enable: true
+  hide: false
+  button: true
+  mobile: true
+  position: right
+  display:
+    archive: true
+    tag: true
+    category: true
+  card_author:
+    enable: true
+    description: "在 AI 时代锻造思想"
+    button:
+      enable: true
+      icon: fab fa-github
+      text: GitHub
+      link: https://github.com/
+  card_announcement:
+    enable: true
+    content: "欢迎来到 Saul's Forge！这里是索尔的 AI 技术博客 🔨"
+  card_recent_post:
+    enable: true
+    limit: 5
+    sort: date
+  card_categories:
+    enable: true
+    limit: 8
+    expand: none
+  card_tags:
+    enable: true
+    limit: 40
+    color: true
+  card_archives:
+    enable: true
+    type: monthly
+    format: MMMM YYYY
+    order: -1
+    limit: 8
+  card_webinfo:
+    enable: true
+    post_count: true
+    last_push_date: true
+
+# ========== 页脚 ==========
+footer:
+  owner:
+    enable: true
+    since: 2026
+  custom_text:
+  copyright: true
+
+# ========== 暗色模式 ==========
+darkmode:
+  enable: true
+  button: true
+  autoChangeMode: false
+
+# ========== 搜索 ==========
+local_search:
+  enable: true
+
+# ========== 评论 ==========
+comments:
+  use: Waline
+  text: true
+  lazyload: true
+  count: true
+  card_post_count: false
+
+waline:
+  serverURL:  # 需要部署 Waline 服务端后填写
+  bg:
+  pageview: true
+  comment_count: true
+  avatar: monsterid
+  meta:
+    - nick
+    - mail
+    - link
+  requiredMeta:
+    - nick
+  wordLimit: 0
+  reaction: false
+
+# ========== 其他功能 ==========
+# 复制设置
+copy:
+  enable: true
+  copyright:
+    enable: true
+    limit_count: 150
+
+# 页面加载动画
+preloader:
+  enable: true
+  source: 1
+
+# 锚点
+anchor:
+  auto_update: false
+  click:
+    enable: false
+    always_show: false
+
+# 图片灯箱
+medium_zoom: false
+fancybox: true
+
+# 页面美化
+beautify:
+  enable: true
+  field: post
+  title-prefix-icon: '\f0c1'
+  title-prefix-icon-color: '#F47466'
