@@ -1,0 +1,338 @@
+:root {
+    /* 苹果风格的柔和配色体系 */
+    --bg-page: #f9fafb;     /* 非常浅的灰白色背景 */
+    
+    /* 卡片底色 (Pastel Colors) */
+    --card-hero: #f0fdfa;   /* 极浅的青绿色 */
+    --card-blog: #fff7ed;   /* 极浅的橙色 */
+    --card-code: #f0f9ff;   /* 极浅的蓝色 */
+    --card-ai: #fdf4ff;     /* 极浅的紫色 */
+    --card-default: #ffffff;/* 纯白 */
+    
+    /* 文本颜色 */
+    --text-main: #111827;
+    --text-muted: #4b5563;
+    --text-light: #9ca3af;
+    
+    /* 重点色/图标颜色 */
+    --accent-hero: #0f766e;
+    --accent-blog: #c2410c;
+    --accent-code: #0369a1;
+    --accent-ai: #a21caf;
+    
+    /* 阴影和光泽 */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 2rem;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ================= 核心网格布局 (Bento Box) ================= */
+.bento-container {
+    display: grid;
+    /* 定义网格：最多4列，由内容决定高度 */
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(150px, auto);
+    gap: 1.5rem;
+    max-width: 1000px;
+    width: 100%;
+}
+
+/* 基础卡片样式 */
+.bento-card {
+    border-radius: 24px;
+    padding: 2rem;
+    background-color: var(--card-default);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ================= 各个功能模块卡片 ================= */
+
+/* 1. 英雄区域卡片（占满2行2列） */
+.hero-card {
+    grid-column: span 2;
+    grid-row: span 2;
+    background-color: var(--card-hero);
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.greeting {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-hero);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.main-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.description {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.avatar-wrapper {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: white;
+    padding: 8px;
+    box-shadow: var(--shadow-md);
+    flex-shrink: 0;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 2. 可交互链接卡片 (博客, 代码, AI) */
+.interactive-card {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+}
+
+.interactive-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: auto; /* 推到顶部 */
+    margin-bottom: 1.5rem;
+}
+
+.card-info h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.card-info p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-action {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.card-action span {
+    margin-right: 0.5rem;
+}
+
+/* 卡片特定的配色 */
+.blog-card {
+    grid-column: span 1;
+    grid-row: span 2; /* 纵向长卡片 */
+    background-color: var(--card-blog);
+}
+.blog-card .card-icon, .blog-card .card-action { color: var(--accent-blog); }
+
+.code-card {
+    grid-column: span 1;
+    background-color: var(--card-code);
+}
+.code-card .card-icon, .code-card .card-action { color: var(--accent-code); }
+
+.ai-card {
+    grid-column: span 1;
+    background-color: var(--card-ai);
+}
+.ai-card .card-icon, .ai-card .card-action { color: var(--accent-ai); }
+
+/* 鼠标悬停时显示"行动呼吁"文字 */
+.interactive-card:hover .card-action {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 3. 技能卡片 */
+.tech-card {
+    grid-column: span 2;
+    background-color: white;
+    justify-content: center;
+}
+
+.tech-card h3, .social-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.tag {
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.tag:hover {
+    background-color: var(--text-main);
+    color: white;
+    transform: scale(1.05);
+}
+
+/* 4. 社交媒体卡片 */
+.social-card {
+    grid-column: span 1;
+    background-color: white;
+    justify-content: center;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.social-link:hover {
+    background-color: var(--text-main);
+    color: white;
+    transform: scale(1.1) rotate(5deg);
+}
+
+
+/* ================= 页脚 ================= */
+.site-footer {
+    margin-top: 4rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+
+/* ================= 响应式设计 ================= */
+@media (max-width: 900px) {
+    .bento-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .hero-card {
+        grid-column: span 2;
+        flex-direction: column-reverse; /* 屏幕小的时候文字在下，头像在上 */
+        text-align: center;
+    }
+    
+    .blog-card {
+        grid-column: span 2;
+        grid-row: span 1; /* 取消纵向长卡片 */
+    }
+    
+    .tech-card, .social-card, .code-card, .ai-card {
+        grid-column: span 2; /* 都在平板上占据整行 */
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 2rem 1rem;
+    }
+    
+    .bento-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .bento-card {
+        padding: 1.5rem;
+    }
+    
+    .hero-card {
+        grid-column: span 1;
+    }
+    
+    .main-title {
+        font-size: 1.8rem;
+    }
+    
+    .blog-card, .tech-card, .social-card, .code-card, .ai-card {
+        grid-column: span 1;
+    }
+}
