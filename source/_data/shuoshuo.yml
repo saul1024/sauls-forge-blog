@@ -1,0 +1,82 @@
+- date: 2026-03-28
+  content: |
+    今天开始搭建博客的心流功能，类似于微博/随想，用来记录日常的碎片化思考。使用 Butterfly 主题内置的说说功能，省去了从零开发的时间。
+  tags:
+    - 博客
+    - 建站
+
+- date: 2026-03-27
+  content: |
+    TIL: 在 AI 时代，编程正在从"写代码"转变为"描述意图"。Vibe Coding 的核心不是让 AI 替你写代码，而是让你专注于更高层次的思考。
+  tags:
+    - AI
+    - 编程
+
+- date: 2026-03-26
+  content: |
+    读完了《纳瓦尔宝典》，最喜欢的一句话："如果你不能决定，答案就是否定。" 选择的本质是放弃，真正重要的事情，你会毫不犹豫。
+  tags:
+    - 读书
+    - 思考
+
+- date: 2026-03-25
+  content: |
+    使用 Claude Code 和 Gemini CLI 需要在网络代理中使用 TUN Mode，之前用 ClashX Pro 总会出莫名其妙的问题，改用 [Clash Verge rev](https://github.com/clash-verge-rev/clash-verge-rev?tab=readme-overview) 之后一切正常。
+  tags:
+    - 工具
+    - 编程
+
+- date: 2026-03-24
+  content: |
+    有人说不要说 vibe-coding 了，要说 Agentic-Coding 或者 Agentic-Engineering。不过我觉得，叫什么名字不重要，关键是在玩还是应用在生产。vibe-coding 指的是一种工作状态，这种状态是一种心流状态，完全沉浸式的"编程"。
+  tags:
+    - AI
+    - 编程
+
+- date: 2026-03-22
+  content: |
+    周末尝试了用 AI 生成博客封面图，效果出乎意料地好。DALL-E 3 对中文提示词的理解比之前版本强了很多，几乎不需要翻译成英文了。
+  tags:
+    - AI
+    - 工具
+
+- date: 2026-03-20
+  content: |
+    在政治书上，反对"左"和反对右是不同的，"左"加引号是为了跟不加引号的左区分。左是进步的，而"左"是盲目的：右则没有歧义，基本代表消极保守。
+  tags:
+    - 政治
+
+- date: 2026-03-18
+  content: |
+    今天第一次用 Cursor 完整地做了一个前端项目，从零到部署只用了 3 小时。AI 辅助编程的效率提升是实实在在的，但更重要的是它改变了我的开发心态——不再惧怕尝试新技术栈。
+  tags:
+    - AI
+    - 编程
+
+- date: 2026-03-15
+  content: |
+    TIL: Git worktree 可以在同一个仓库里同时检出多个分支到不同目录。再也不用来回切分支了。`git worktree add ../feature-branch feature-branch` 就够了。
+  tags:
+    - 编程
+    - 工具
+
+- date: 2026-03-12
+  content: |
+    重新审视了自己的时间管理系统。核心发现：任务清单不是越长越好，能量管理比时间管理更重要。高能量时段留给创造性工作，低能量时段处理机械性事务。
+  tags:
+    - 时间管理
+    - 思考
+
+- date: 2026-03-08
+  content: |
+    自从开始 Vibe Code 以来，我的典型的周末一天日程 be like: 起床 → Vibe Coding → 跑步 → 洗澡 → Vibe Coding → 吃早餐 → Vibe Coding → 吃午饭（外卖） → Vibe Coding → 午休 → Vibe Coding → 游泳 → Vibe Coding → 晚餐 → Vibe Coding → 睡觉。
+  tags:
+    - 编程
+    - AI
+
+- date: 2026-03-05
+  content: |
+    好的代码就像好的散文——清晰、简洁、有节奏感。今天重构了一段 500 行的函数，拆成了 8 个小函数，每个都不超过 30 行。读起来顺畅多了。
+  tags:
+    - 编程
+    - 思考

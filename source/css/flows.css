@@ -1,0 +1,392 @@
+/* ================= 心流页面 - hutusi 风格 ================= */
+
+/* 去掉 Butterfly 默认的内嵌卡片面板 */
+.layout > div:first-child:not(.nc) {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 20px 0 !important;
+}
+
+.layout > div:first-child:not(.nc):hover {
+  box-shadow: none !important;
+}
+
+/* 页面布局：左侧边栏 + 右侧内容 */
+.flows-page {
+  display: flex;
+  gap: 2.5rem;
+  max-width: 100%;
+}
+
+.flows-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.flows-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  order: -1; /* sidebar on the left */
+}
+
+/* 随笔计数 */
+.flows-count {
+  color: #999;
+  font-size: 0.9rem;
+  margin-bottom: 1.2rem;
+}
+
+/* ================= 日历组件 ================= */
+.flows-calendar {
+  margin-bottom: 0.5rem;
+}
+
+.cal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  padding: 0 2px;
+}
+
+.cal-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.cal-nav {
+  cursor: pointer;
+  color: #999;
+  font-size: 0.85rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.cal-nav:hover {
+  color: #4db6ac;
+  background: rgba(77, 182, 172, 0.08);
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  text-align: center;
+}
+
+.cal-dow {
+  font-size: 0.75rem;
+  color: #aaa;
+  padding: 4px 0;
+  font-weight: 500;
+}
+
+.cal-day {
+  font-size: 0.8rem;
+  color: #666;
+  padding: 5px 0;
+  border-radius: 4px;
+  position: relative;
+}
+
+.cal-day.cal-empty {
+  visibility: hidden;
+}
+
+.cal-day.cal-today {
+  border: 1px solid #4db6ac;
+  font-weight: 600;
+  color: #4db6ac;
+}
+
+.cal-day.cal-has-flow {
+  font-weight: 700;
+  color: #333;
+}
+
+.cal-day.cal-has-flow::after {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #4db6ac;
+  margin: 1px auto 0;
+}
+
+/* 浏览链接 */
+.flows-sidebar-browse {
+  padding: 0.3rem 0;
+}
+
+.browse-link {
+  font-size: 0.88rem;
+  color: #999;
+  cursor: default;
+}
+
+/* ================= 时间轴 ================= */
+.flows-list {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.flows-list::before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 0.5rem;
+  bottom: 0;
+  width: 2px;
+  background: #e0e0e0;
+}
+
+/* ================= 单条心流 ================= */
+.flow-item {
+  position: relative;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.6rem;
+}
+
+/* 日期头部 */
+.flow-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+  margin-left: -1rem;
+}
+
+.flow-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #4db6ac;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.flow-date {
+  color: #4db6ac;
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 0.02em;
+}
+
+/* 内容区域 */
+.flow-body {
+  padding-left: 1.1rem;
+}
+
+.flow-content {
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.flow-content p {
+  margin-bottom: 0.5rem;
+}
+
+.flow-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* 内容截断（长文本） */
+.flow-content.flow-truncated {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.flow-content a {
+  color: #4db6ac;
+  text-decoration: none;
+  border-bottom: 1px dashed #4db6ac;
+}
+
+.flow-content a:hover {
+  border-bottom-style: solid;
+}
+
+/* 标签 - 隐藏帖子内的标签，只在侧边栏显示 */
+.flow-tags {
+  display: none;
+}
+
+/* ================= 侧边栏标签云 ================= */
+.flows-sidebar-section {
+  margin-bottom: 1.5rem;
+}
+
+.flows-sidebar-section h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 0.8rem;
+}
+
+.flow-cloud-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.flow-cloud-tag {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 14px;
+  font-size: 0.78rem;
+  color: #666;
+  cursor: default;
+  transition: all 0.2s;
+}
+
+.flow-cloud-tag:hover {
+  border-color: #4db6ac;
+  color: #4db6ac;
+  background-color: rgba(77, 182, 172, 0.05);
+}
+
+/* ================= 分页 ================= */
+.flows-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+}
+
+.fp-btn {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 0.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: #fff;
+  color: #666;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fp-btn:hover:not(:disabled) {
+  border-color: #4db6ac;
+  color: #4db6ac;
+}
+
+.fp-btn.fp-active {
+  background-color: #4db6ac;
+  border-color: #4db6ac;
+  color: #fff;
+}
+
+.fp-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ================= 暗色模式 ================= */
+[data-theme="dark"] .flow-content {
+  color: #c4c6c9;
+}
+
+[data-theme="dark"] .flow-dot {
+  background-color: #5ac8be;
+}
+
+[data-theme="dark"] .flow-date {
+  color: #5ac8be;
+}
+
+[data-theme="dark"] .flows-list::before {
+  background: #444;
+}
+
+[data-theme="dark"] .flow-tag {
+  color: #888;
+}
+
+[data-theme="dark"] .flow-tag:hover {
+  color: #5ac8be;
+}
+
+[data-theme="dark"] .cal-title {
+  color: #ccc;
+}
+
+[data-theme="dark"] .cal-day {
+  color: #999;
+}
+
+[data-theme="dark"] .cal-day.cal-has-flow {
+  color: #eee;
+}
+
+[data-theme="dark"] .cal-day.cal-has-flow::after {
+  background: #5ac8be;
+}
+
+[data-theme="dark"] .cal-day.cal-today {
+  border-color: #5ac8be;
+  color: #5ac8be;
+}
+
+[data-theme="dark"] .flow-cloud-tag {
+  border-color: #444;
+  color: #aaa;
+}
+
+[data-theme="dark"] .flow-cloud-tag:hover {
+  border-color: #5ac8be;
+  color: #5ac8be;
+  background-color: rgba(90, 200, 190, 0.1);
+}
+
+[data-theme="dark"] .flows-sidebar-section h4 {
+  color: #ccc;
+}
+
+[data-theme="dark"] .fp-btn {
+  background: var(--card-bg, #1d1e22);
+  border-color: #444;
+  color: #aaa;
+}
+
+[data-theme="dark"] .fp-btn:hover:not(:disabled) {
+  border-color: #5ac8be;
+  color: #5ac8be;
+}
+
+[data-theme="dark"] .fp-btn.fp-active {
+  background-color: #5ac8be;
+  border-color: #5ac8be;
+  color: #fff;
+}
+
+/* ================= 响应式 ================= */
+@media (max-width: 768px) {
+  .flows-page {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .flows-sidebar {
+    width: 100%;
+    order: -1;
+  }
+
+  .flows-calendar {
+    max-width: 280px;
+  }
+}
