@@ -34,7 +34,7 @@ hexo.extend.filter.register('after_post_render', function (data) {
       ? item.tags.map(t => `<span class="flow-tag">#${t}</span>`).join(' ')
       : ''
 
-    return `<div class="flow-item"><div class="flow-header"><span class="flow-dot"></span><span class="flow-date">${item.date}</span></div><div class="flow-body"><div class="flow-content">${item.content}</div>${tags ? `<div class="flow-tags">${tags}</div>` : ''}</div></div>`
+    return `<div class="flow-item" data-date="${item.date}"><div class="flow-header"><span class="flow-dot"></span><span class="flow-date">${item.date}</span></div><div class="flow-body"><div class="flow-content">${item.content}</div>${tags ? `<div class="flow-tags">${tags}</div>` : ''}</div></div>`
   }).join('')
 
   // Build tag cloud from all flow tags
@@ -77,29 +77,73 @@ hexo.extend.filter.register('after_post_render', function (data) {
 <script>
 (function() {
 var perPage = ${perPage};
-var items = document.querySelectorAll('.flow-item');
-var total = items.length;
-var totalPages = Math.ceil(total / perPage);
+var allItems = document.querySelectorAll('.flow-item');
+var total = allItems.length;
 var currentPage = 1;
+var activeFilter = null;
+
+function getVisibleItems() {
+  var result = [];
+  allItems.forEach(function(item) {
+    if (!activeFilter || item.getAttribute('data-date') === activeFilter) {
+      result.push(item);
+    }
+  });
+  return result;
+}
+
 function showPage(page) {
-currentPage = page;
-items.forEach(function(item, i) {
-item.style.display = (i >= (page-1)*perPage && i < page*perPage) ? '' : 'none';
-});
-renderPagination();
+  currentPage = page;
+  var visible = getVisibleItems();
+  var totalPages = Math.ceil(visible.length / perPage);
+  allItems.forEach(function(item) { item.style.display = 'none'; });
+  visible.forEach(function(item, i) {
+    item.style.display = (i >= (page-1)*perPage && i < page*perPage) ? '' : 'none';
+  });
+  renderPagination(visible.length, totalPages);
+  updateCount(visible.length);
 }
-function renderPagination() {
-if (totalPages <= 1) return;
-var el = document.getElementById('flows-pagination');
-var html = '';
-html += '<button class="fp-btn" ' + (currentPage===1?'disabled':'') + ' onclick="window.__flowsGoPage(' + (currentPage-1) + ')">&laquo;</button>';
-for (var i = 1; i <= totalPages; i++) {
-html += '<button class="fp-btn' + (i===currentPage?' fp-active':'') + '" onclick="window.__flowsGoPage(' + i + ')">' + i + '</button>';
+
+function updateCount(count) {
+  var countEl = document.querySelector('.flows-count');
+  if (!countEl) return;
+  if (activeFilter) {
+    countEl.innerHTML = '<span class="flows-filter-info">' + activeFilter + ' 共 ' + count + ' 条随笔。<a href="javascript:void(0)" onclick="window.__flowsClearFilter()" class="flows-clear-filter">显示全部</a></span>';
+  } else {
+    countEl.textContent = '共 ' + total + ' 条随笔。';
+  }
 }
-html += '<button class="fp-btn" ' + (currentPage===totalPages?'disabled':'') + ' onclick="window.__flowsGoPage(' + (currentPage+1) + ')">&raquo;</button>';
-el.innerHTML = html;
+
+function renderPagination(visibleCount, totalPages) {
+  var el = document.getElementById('flows-pagination');
+  if (totalPages <= 1) { el.innerHTML = ''; return; }
+  var html = '';
+  html += '<button class="fp-btn" ' + (currentPage===1?'disabled':'') + ' onclick="window.__flowsGoPage(' + (currentPage-1) + ')">&laquo;</button>';
+  for (var i = 1; i <= totalPages; i++) {
+    html += '<button class="fp-btn' + (i===currentPage?' fp-active':'') + '" onclick="window.__flowsGoPage(' + i + ')">' + i + '</button>';
+  }
+  html += '<button class="fp-btn" ' + (currentPage===totalPages?'disabled':'') + ' onclick="window.__flowsGoPage(' + (currentPage+1) + ')">&raquo;</button>';
+  el.innerHTML = html;
 }
+
 window.__flowsGoPage = function(p) { showPage(p); window.scrollTo({top:0,behavior:'smooth'}); };
+
+window.__flowsFilterByDate = function(dateStr) {
+  if (activeFilter === dateStr) {
+    activeFilter = null;
+  } else {
+    activeFilter = dateStr;
+  }
+  showPage(1);
+  renderCalendar(calYear, calMonth);
+};
+
+window.__flowsClearFilter = function() {
+  activeFilter = null;
+  showPage(1);
+  renderCalendar(calYear, calMonth);
+};
+
 showPage(1);
 
 /* ===== Truncation ===== */
@@ -113,9 +157,9 @@ el.classList.add('flow-truncated');
 /* ===== Calendar ===== */
 var flowDates = ${flowDatesJson};
 var calEl = document.getElementById('flows-calendar');
-var now = new Date();
-var calYear = now.getFullYear();
-var calMonth = now.getMonth();
+var latestDate = flowDates.length > 0 ? new Date(flowDates[0] + 'T00:00:00') : new Date();
+var calYear = latestDate.getFullYear();
+var calMonth = latestDate.getMonth();
 function renderCalendar(year, month) {
 calYear = year; calMonth = month;
 var firstDay = new Date(year, month, 1).getDay();
@@ -129,10 +173,16 @@ for (var d = 1; d <= daysInMonth; d++) {
 var dateStr = year + '-' + String(month+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
 var hasFlow = flowDates.indexOf(dateStr) !== -1;
 var isToday = (d === today.getDate() && month === today.getMonth() && year === today.getFullYear());
+var isSelected = (activeFilter === dateStr);
 var cls = 'cal-day';
 if (hasFlow) cls += ' cal-has-flow';
 if (isToday) cls += ' cal-today';
-html += '<span class="' + cls + '">' + d + '</span>';
+if (isSelected) cls += ' cal-selected';
+if (hasFlow) {
+  html += '<span class="' + cls + '" onclick="window.__flowsFilterByDate(&quot;' + dateStr + '&quot;)">' + d + '</span>';
+} else {
+  html += '<span class="' + cls + '">' + d + '</span>';
+}
 }
 html += '</div>';
 calEl.innerHTML = html;

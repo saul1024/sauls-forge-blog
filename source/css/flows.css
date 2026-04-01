@@ -107,6 +107,13 @@
 .cal-day.cal-has-flow {
   font-weight: 700;
   color: #333;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cal-day.cal-has-flow:hover {
+  background: rgba(77, 182, 172, 0.12);
+  color: #4db6ac;
 }
 
 .cal-day.cal-has-flow::after {
@@ -119,6 +126,17 @@
   margin: 1px auto 0;
 }
 
+.cal-day.cal-selected {
+  background: #4db6ac !important;
+  color: #fff !important;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.cal-day.cal-selected::after {
+  background: #fff !important;
+}
+
 /* 浏览链接 */
 .flows-sidebar-browse {
   padding: 0.3rem 0;
@@ -128,6 +146,26 @@
   font-size: 0.88rem;
   color: #999;
   cursor: default;
+}
+
+/* 过滤信息 */
+.flows-filter-info {
+  color: #4db6ac;
+  font-weight: 500;
+}
+
+.flows-clear-filter {
+  color: #999;
+  text-decoration: none;
+  margin-left: 0.8rem;
+  font-size: 0.85rem;
+  border-bottom: 1px dashed #999;
+  transition: all 0.2s;
+}
+
+.flows-clear-filter:hover {
+  color: #4db6ac;
+  border-bottom-color: #4db6ac;
 }
 
 /* ================= 时间轴 ================= */
@@ -340,6 +378,34 @@
 [data-theme="dark"] .cal-day.cal-today {
   border-color: #5ac8be;
   color: #5ac8be;
+}
+
+[data-theme="dark"] .cal-day.cal-selected {
+  background: #5ac8be !important;
+  color: #1d1e22 !important;
+}
+
+[data-theme="dark"] .cal-day.cal-selected::after {
+  background: #1d1e22 !important;
+}
+
+[data-theme="dark"] .cal-day.cal-has-flow:hover {
+  background: rgba(90, 200, 190, 0.15);
+  color: #5ac8be;
+}
+
+[data-theme="dark"] .flows-filter-info {
+  color: #5ac8be;
+}
+
+[data-theme="dark"] .flows-clear-filter {
+  color: #888;
+  border-bottom-color: #888;
+}
+
+[data-theme="dark"] .flows-clear-filter:hover {
+  color: #5ac8be;
+  border-bottom-color: #5ac8be;
 }
 
 [data-theme="dark"] .flow-cloud-tag {
